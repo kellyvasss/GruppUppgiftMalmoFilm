@@ -1,3 +1,5 @@
+package Movie;
+
 public class Movie {
 
     //Deklarera instansvariabler för att lagra information om en film
@@ -22,7 +24,7 @@ public class Movie {
      String type;
 
 
-     //Konstruktor för att skapa en instans av klassen Movie
+     //Konstruktor för att skapa en instans av klassen Movie.Movie
     public Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String writer, String actors, String plot, String language, String country, String awards, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String type) {
 
         //Sätt värden för alla variabler

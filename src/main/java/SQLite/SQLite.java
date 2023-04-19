@@ -1,3 +1,7 @@
+package SQLite;
+
+import Movie.Movie;
+
 import java.sql.*;
 
 public class SQLite {

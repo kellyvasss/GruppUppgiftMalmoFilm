@@ -1,3 +1,7 @@
+package OMDB;
+
+import Movie.Movie;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-public class OMDBApi {
+/*public class OMDBApi {
     private final String apiKey;
 
     public OMDBApi(String apiKey) {
@@ -56,7 +60,7 @@ public class OMDBApi {
             }
         }
 
-        // Skapar en Movie-objekt med de extraherade filmuppgifterna och returnerar objektet
+        // Skapar en Movie.Movie-objekt med de extraherade filmuppgifterna och returnerar objektet
         return new Movie(movieTitle, movieYear, movieGenre, movieDirector, movieActors);
     }
 
@@ -81,4 +85,4 @@ public class OMDBApi {
         // Pararser API-svaret och extraherar filmens titel, år, genre, regissör och skådespelare
         String[] parts = response.split(",");
         String movieTitle = "";
-        int movie
+        int movie */

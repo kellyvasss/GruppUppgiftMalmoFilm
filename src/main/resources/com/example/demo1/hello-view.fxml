@@ -5,12 +5,48 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.demo1.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
+    <HBox alignment="TOP_CENTER" spacing="20.0">
+        <Button fx:id="btnSearch" text="Search" onAction="#onSearchClick" visible="true"/>
+        <ChoiceBox value="Search by" fx:id="categories" visible="true">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Search on: Movie.Movie Title" />
+                    <String fx:value="Search on: Actor" />
+                    <String fx:value="Search on: Director" />
+                    <String fx:value="Search on: Genre" />
+                    <String fx:value="Search on: Year" />
+                    <String fx:value="Search on: Movie.Movie Title and Year" />
+                    <String fx:value="Show all: Movie.Movie Titles" />
+                    <String fx:value="Show all: Movies by Actor" />
+                    <String fx:value="Show all: Movies by Director" />
+                    <String fx:value="Show all: Movies by Genre" />
+                    <String fx:value="Show all: Movies by Year" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+    </HBox>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
+    <HBox alignment="TOP_CENTER" spacing="20.0">
+        <Label fx:id="notYearInput" text="Your search"/>
+        <TextField fx:id="userInputNotYear" visible="true"/>
+    </HBox>
+    <HBox alignment="TOP_CENTER" spacing="20.0">
+        <Label fx:id="yearInput" text="Year" />
+        <TextField fx:id="userInputYear" visible="true"/>
+    </HBox>
+    <TextArea fx:id="result" visible="true" editable="false" />
+    <ImageView fx:id="image"/>
 </VBox>
