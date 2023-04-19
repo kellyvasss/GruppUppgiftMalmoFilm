@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9066c662-41b3-4f0e-a8aa-0d43f896ec72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Movie.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9066c662-41b3-4f0e-a8aa-0d43f896ec72" name="Changes" comment="Movie">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -91,6 +90,17 @@
       <option name="presentableId" value="Default" />
       <updated>1681903340049</updated>
     </task>
+    <task id="LOCAL−00001" summary="Movie">
+      <created>1681907863319</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1681907863319</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Movie" />
+    <option name="LAST_COMMIT_MESSAGE" value="Movie" />
   </component>
 </project>
