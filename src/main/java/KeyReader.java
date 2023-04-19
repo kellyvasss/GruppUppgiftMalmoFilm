@@ -5,16 +5,24 @@ public class KeyReader {
 
     Properties prop;
 
-    public KeyReader(String fileKey) {
-        prop = new Properties();
+    private KeyReader(Properties properties) {
+        this.prop = properties;
+    }
+
+    public static KeyReader fromFile(String fileKey) {
+        Properties properties = new Properties();
         String userHome = System.getProperty("user.home");
         try {
             FileInputStream input = new FileInputStream(userHome + "/OneDrive/Dokument/APIkeys/" + fileKey + ".txt");
-            prop.load(input);
+            properties.load(input);
         } catch (Exception e) {
         }
+        return new KeyReader(properties);
     }
-    public String getAPIKey(){return prop.getProperty("apiKey");}
+
+    public String getAPIKey(){
+        return prop.getProperty("apiKey");
+    }
 
     public String getKey(String key){
         return prop.getProperty(key);
