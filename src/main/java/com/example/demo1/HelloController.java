@@ -52,9 +52,9 @@ public class HelloController {
             sqLite.addMovie(movie);
         }
     }
-    private void moviePic() {
+    private void moviePic(String poster) {
         // Här behövs det från JSON-object att man tar key-value "Poster"
-        Image image1 = new Image("https://m.media-amazon.com/images/M/MV5BZGM5NjliODgtODVlOS00OWZmLWIzYzMtMTI2OWIzMTM1ZGRhXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg");
+        Image image1 = new Image(poster);
         image.setImage(image1);
     }
     private String userSearch(TextField textField) {
@@ -120,6 +120,7 @@ public class HelloController {
         if (sqLite.getMovieTitleAndYear(search, searchYear).isEmpty()) {
             if (omdbApi.searchTitleAndYear(search, searchYear) != null) { // om filmen finns i omdb API
                 Movie movie1 = omdbApi.createMovie(omdbApi.searchTitleAndYear(search, searchYear)); // Ny film sparas från omdb's API
+                moviePic(movie1.getPoster());
                 result.setText(movie1.toString()); // Information om film skrivs ut i TextArea
                 addMovie(movie1); // Frågar om användaren vill lägga till filmen i DB
             } else {

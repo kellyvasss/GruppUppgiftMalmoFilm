@@ -9,10 +9,11 @@ public class Movie {
      String director;
      String type;
      String actor;
+     String poster;
 
 
      //Konstruktor för att skapa en instans av klassen Movie.Movie
-    public Movie(String title, String year,  String genre, String director, String actor, String type) {
+    public Movie(String title, String year,  String genre, String director, String actor, String type, String poster) {
 
         //Sätt värden för alla variabler
         this.title = title;
@@ -21,6 +22,19 @@ public class Movie {
         this.director = director;
         this.type = type;
         this.actor=actor;
+        this.poster = poster;
+    }
+    public String getPoster() {
+        return poster;
+    }
+    @Override
+    public String toString() {
+        return "Title: " + title +
+                "\nYear: " + year +
+                "\nGenre: " + genre +
+                "\nDirector: " + director +
+                "\nType: " + type +
+                "\nActors: " + actor;
     }
 
     //Getters & Setters-metoder för att hämta och ändra instansvariabler

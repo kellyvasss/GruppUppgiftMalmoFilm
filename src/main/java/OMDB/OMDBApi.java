@@ -96,6 +96,8 @@ public class OMDBApi {
                 response.append(inputLine);
             }
             in.close();
+            JSONObject jsonObject = new JSONObject(response.toString());
+
             return new JSONObject(response.toString());
 
         } catch (Exception e) {
@@ -112,12 +114,11 @@ public class OMDBApi {
         String title = json.optString("Title", "");
         String year = json.optString("Year", "");
         String director = json.optString("Director", "");
-        String plot = json.optString("Plot", "");
         String posterUrl = json.optString("Poster", "");
         String actor = json.optString("actor", "");
         String genre = json.optString("Genre", "");
         String type = json.optString("type", "");
 
-        return new Movie(title,year,genre,director,actor,type);
+        return new Movie(title,year,genre,director,actor,type, posterUrl);
     }
 }
