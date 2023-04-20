@@ -25,13 +25,13 @@
         <ChoiceBox value="Search by" fx:id="categories" visible="true">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Search on: Movie.Movie Title" />
+                    <String fx:value="Search on: Movie Title" />
                     <String fx:value="Search on: Actor" />
                     <String fx:value="Search on: Director" />
                     <String fx:value="Search on: Genre" />
                     <String fx:value="Search on: Year" />
-                    <String fx:value="Search on: Movie.Movie Title and Year" />
-                    <String fx:value="Show all: Movie.Movie Titles" />
+                    <String fx:value="Search on: Movie Title and Year" />
+                    <String fx:value="Show all: Movie Titles" />
                     <String fx:value="Show all: Movies by Actor" />
                     <String fx:value="Show all: Movies by Director" />
                     <String fx:value="Show all: Movies by Genre" />
