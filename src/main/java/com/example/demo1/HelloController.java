@@ -42,7 +42,6 @@ public class HelloController {
         omdbApi = new OMDBApi(keyReader.getAPIKey());
 
     }
-
     private void addMovie(Movie movie) {
         alert.setTitle("Add Movie");
         alert.setHeaderText(null);
@@ -52,13 +51,11 @@ public class HelloController {
             sqLite.addMovie(movie);
         }
     }
-
     private void moviePic() {
         // Här behövs det från JSON-object att man tar key-value "Poster"
         Image image1 = new Image("https://m.media-amazon.com/images/M/MV5BZGM5NjliODgtODVlOS00OWZmLWIzYzMtMTI2OWIzMTM1ZGRhXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg");
         image.setImage(image1);
     }
-
     private String userSearch(TextField textField) {
         try {
             return textField.getText();
