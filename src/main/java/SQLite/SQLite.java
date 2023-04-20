@@ -37,7 +37,7 @@ public class SQLite {
                         "\n";
             }
         } catch (SQLException e ) {
-            System.exit(0);
+            return "bajs";
         } return movies;
     }
 

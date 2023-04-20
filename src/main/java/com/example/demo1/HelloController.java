@@ -155,8 +155,9 @@ public class HelloController {
             String userChoiseBox = choiceBoxChoice();
             // Här bestämst hur sökningen skall genomföras genom att kontrollera vilket alternativ i choiceBoxen användaren valt
         switch (userChoiseBox) {
+            // Uppdaterad SQL kod som fungerar
+            case "Show all: Movie Titles":
             case "Search on: Movie Title":
-                //searchMovie(search);
                 result.setText(sqLite.getMovieTitles(search));
                 break;
             case "Show all: Movies by Actor":
@@ -178,9 +179,6 @@ public class HelloController {
             case "Search on: Movie Title and Year":
                 String searchYear = userSearch(userInputYear);
                 searchTitleAndYear(search, searchYear);
-                break;
-            case "Show all: Movie Titles":
-                showAllMoviesByTitle(search);
                 break;
             default:
                 setTextAlert("Note", "You have to search on something");
