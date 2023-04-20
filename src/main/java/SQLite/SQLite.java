@@ -18,10 +18,18 @@ public class SQLite {
             System.out.println("Error: " +e.getMessage()); // felmeddelande vid misslyckad anslutning
         }
     }
-    public Movie[] getMovie(String title) throws SQLException { //metod för att hämta filmer baserat på titel
-        PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE title = ?");
-        pstmt.setString(1, title);
-        return getMovie(pstmt.toString());
+
+
+        public Movie[] getMovie(String title) {
+            try {
+                PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM movies WHERE title = ?");
+                pstmt.setString(1, title);
+                return getMovie(pstmt.toString());
+            } catch (SQLException e) {
+                e.printStackTrace();
+                // eller hantera undantaget på ett annat lämpligt sätt
+                return null;
+            }
     }
     public Movie[] getMovie(String title, String year) throws SQLException{//metod för att hämta filmer baserat på titel och år
         PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE title = ? AND year = ?");
