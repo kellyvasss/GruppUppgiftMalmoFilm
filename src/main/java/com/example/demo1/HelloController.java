@@ -86,20 +86,20 @@ public class HelloController {
     }
     private void searchActor(String search) throws SQLException {
         // Här går det enbart att söka via SQLite
-        if (sqLite.getActor(search) == null) {
+        if (sqLite.getMovieActor(search) == null) {
             // Om actor ej hittas
             result.setText("The actor was not found");
         } else {
             // Om actor hittas, använd metod getActor för att skriva ut info om actor
-            result.setText(Arrays.toString(sqLite.getActor(search)));
+            result.setText(sqLite.getMovieActor(search));
         }
     }
     private void searchDirector(String search) throws SQLException {
         // Här går det bara att söka via SQLite
-        if (sqLite.getDirector(search) == null) {
+        if (sqLite.getMovieDirector(search) == null) {
             result.setText("The director was not found");
         } else {
-            result.setText(Arrays.toString(sqLite.getDirector(search)));
+            result.setText(sqLite.getMovieDirector(search));
         }
     }
     private void searchGenre(String search) throws SQLException {
@@ -137,10 +137,10 @@ public class HelloController {
     }
     private void showAllMoviesByTitle(String search) {
         // Här går det bara att söka via SQLite
-        if (sqLite.getMovie(search) == null) {
+        if (sqLite.getMovieTitles(search) == null) {
             result.setText("No movies with that title was found");
         } else {
-            result.setText(Arrays.toString(sqLite.getMovie(search)));
+            result.setText(sqLite.getMovieTitles(search));
         }
     }
     @FXML
@@ -158,12 +158,14 @@ public class HelloController {
             // Uppdaterad SQL kod som fungerar
             case "Show all: Movie Titles":
             case "Search on: Movie Title":
-                result.setText(sqLite.getMovieTitles(search));
+                showAllMoviesByTitle(search);
                 break;
+                // Uppdaterad SQL kod som fungerar
             case "Show all: Movies by Actor":
             case "Search on: Actor":
                 searchActor(search);
                 break;
+                // Uppdaterad SQL kod som fungerar
             case "Show all: Movies by Director":
             case "Search on: Director":
                 searchDirector(search);

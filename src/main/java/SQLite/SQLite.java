@@ -38,7 +38,11 @@ public class SQLite {
             }
         } catch (SQLException e ) {
             return "bajs";
-        } return movies;
+        }
+        if (movies.isEmpty()) {
+            return "No movies with this title was found";
+        }
+        return movies;
     }
 
         public Movie[] getMovie(String title) {
@@ -66,10 +70,58 @@ public class SQLite {
         pstmt.setString(3, type);
         return getMovie(pstmt.toString());
     }
+    public String getMovieActor(String actor) {
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE actors =?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,actor);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            return "bajs";
+
+        }
+        if (movies.isEmpty()) {
+            return "No movies with this actor was found";
+        }
+        return movies;
+    }
     public Movie[] getActor(String actor) throws SQLException{// Metod för att hämta filmer baserat på skådespelare
         PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE actors LIKE ?");
         pstmt.setString(1,"&" + actor + "&");
         return getMovie(pstmt.toString());
+    }
+    public String getMovieDirector(String director) {
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE director =?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,director);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            return "bajs";
+
+        }
+        if (movies.isEmpty()) {
+            return "No movies with this director was found";
+        }
+        return movies;
     }
     public Movie[] getDirector(String director) throws SQLException{// Metod för att hämta filmer baserat på regissör
         PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE director  = ?");
