@@ -35,9 +35,10 @@ public class HelloController {
     private KeyReader keyReader;
     public HelloController() {
         alert = new Alert(Alert.AlertType.CONFIRMATION);
-        sqLite = new SQLite("Movie DB");
         keyReader = new KeyReader("OMDB");
         omdbApi = new OMDBApi(keyReader.getAPIKey());
+        sqLite = new SQLite("Movie DB");
+        sqLite.createTable();
 
     }
     private void addMovie(Movie movie) {
@@ -144,7 +145,7 @@ public class HelloController {
     @FXML
     protected void onSearchClick() throws SQLException {
         String search = userSearch(userInputNotYear);
-        if (!search.isEmpty()) {
+        if (search.isEmpty()) {
             setTextAlert("Missing search", "You have to type in something to search for");
             alert.showAndWait();
             return;
@@ -185,11 +186,8 @@ public class HelloController {
                 break;
         }
     }
-
     @FXML
     private String choiceBoxChoice() {
         return categories.getValue().toString();
     }
-
-
 }

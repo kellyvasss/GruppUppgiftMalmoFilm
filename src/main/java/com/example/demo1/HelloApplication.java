@@ -16,6 +16,7 @@ public class HelloApplication extends Application {
         scene.getRoot().setStyle("-fx-background-color: lightblue;");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {
