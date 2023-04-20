@@ -70,6 +70,7 @@ public class OMDBApi {
                 response.append(inputLine);
             }
             in.close();
+
             return new JSONObject(response.toString());
 
         } catch (Exception e) {

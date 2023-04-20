@@ -102,21 +102,12 @@ public class HelloController {
             result.setText(sqLite.getMovieDirector(search));
         }
     }
-    private void searchGenre(String search) throws SQLException {
-        // Här går det bara att söka via SQLite
-        if (sqLite.getGenre(search) == null) {
-            result.setText("The genre was not found");
-        } else {
-            result.setText(Arrays.toString(sqLite.getGenre(search)));
-        }
+    private void searchGenre(String search) {
+        result.setText(sqLite.getMovieGenre(search));
     }
     private void searchYear(String search) throws SQLException {
         // Här går det bara att söka via SQLite
-        if (sqLite.getYear(search) == null) {
-            result.setText("The year was not found");
-        } else {
-            result.setText(Arrays.toString(sqLite.getYear(search)));
-        }
+        result.setText(sqLite.getMovieYear(search));
     }
 
     private void searchTitleAndYear(String search, String searchYear) throws SQLException {
@@ -133,6 +124,10 @@ public class HelloController {
             }
         } else { // Om sqlite hittade filmen, skall denna visas i TextArea
                 result.setText(Arrays.toString(sqLite.getMovie(search, searchYear)));
+        }
+
+        if(sqLite.getMovieTitleAndYear(search,searchYear).isEmpty()) {
+
         }
     }
     private void showAllMoviesByTitle(String search) {
@@ -170,14 +165,17 @@ public class HelloController {
             case "Search on: Director":
                 searchDirector(search);
                 break;
+                // Uppdaterad SQL kod som fungerar
             case "Show all: Movies by Genre":
             case "Search on: Genre":
                 searchGenre(search);
                 break;
+                // Uppdaterad SQL kod som fungerar
             case "Show all: Movies by Year":
             case "Search on: Year":
                 searchYear(search);
                 break;
+
             case "Search on: Movie Title and Year":
                 String searchYear = userSearch(userInputYear);
                 searchTitleAndYear(search, searchYear);

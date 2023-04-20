@@ -57,6 +57,28 @@ public class SQLite {
                 return null;
             }
     }
+    public String getMovieTitleAndYear(String title, String year) {
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE title = ? AND year = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,title);
+            preparedStatement.setString(2,year);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            return "bajs";
+
+        }
+        return movies;
+    }
     public Movie[] getMovie(String title, String year) throws SQLException{//metod för att hämta filmer baserat på titel och år
         PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE title = ? AND year = ?");
         pstmt.setString(1, title);
@@ -72,7 +94,7 @@ public class SQLite {
     }
     public String getMovieActor(String actor) {
         String movies = "";
-        String sql = "SELECT * FROM movies WHERE actors =?";
+        String sql = "SELECT * FROM movies WHERE actors LIKE ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1,actor);
@@ -128,10 +150,58 @@ public class SQLite {
         pstmt.setString(1, director);
         return getMovie(pstmt.toString());
     }
+    public String getMovieGenre(String genre) {
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE genre =?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,genre);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            return "bajs";
+
+        }
+        if (movies.isEmpty()) {
+            return "No movies with this genre was found";
+        }
+        return movies;
+    }
     public Movie[] getGenre(String genre) throws SQLException{// Metod för att hämta filmer baserat på genre
         PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE genre LIKE ?");
         pstmt.setString(1, "&" + genre + "&");
         return getMovie(pstmt.toString());
+    }
+    public String getMovieYear(String year) {
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE year =?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,year);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            return "bajs";
+
+        }
+        if (movies.isEmpty()) {
+            return "No movies from this year found";
+        }
+        return movies;
     }
     public Movie[] getYear(String year) throws SQLException{// Metod för att hämta filmer baserat på år
         PreparedStatement pstmt= conn.prepareStatement("SELECT * FROM movies WHERE year = ?");
