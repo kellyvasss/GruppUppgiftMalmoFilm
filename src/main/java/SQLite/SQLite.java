@@ -65,7 +65,7 @@ public class SQLite {
             pstmt.setString(2, movie.getYear());
             pstmt.setString(3, movie.getType());
             pstmt.setString(4, movie.getDirector());
-            pstmt.setString(5, movie.getActors());
+            pstmt.setString(5, movie.getActor());
             pstmt.setString(6, movie.getGenre());
             pstmt.executeUpdate();
             pstmt.close();
