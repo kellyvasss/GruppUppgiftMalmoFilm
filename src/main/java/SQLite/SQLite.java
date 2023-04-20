@@ -74,15 +74,33 @@ public class SQLite {
         }
         System.out.println("Filmen har lagts till"); //skriv ut film lagts till
     }
+    public void createTable(){
+        try {
+            Statement stmt = conn.createStatement();
+            String sql= "CREATE TABLE IF NOT EXISTS movies (\n"
+                    + "id INTEGER PRIMARY KEY,\n"
+                    + "title TEXT,\n"
+                    + "year TEXT,\n"
+                    + "type TEXT,\n"
+                    + "director TEXT,\n"
+                    + "actors TEXT,\n"
+                    + "genre TEXT\n"
+                    + ");";
+            stmt.execute(sql);
+            stmt.close();
+        }catch (SQLException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        System.out.println("Tabellen har skapats.");
+    }
 
-    //Osäker om jag ska stänga här*//
     public void close(){
         try{
             conn.close();
         }catch (SQLException e){
             System.out.println("Error: " +e.getMessage());
         }
-        System.out.println("Databasanslutningen stängd."); //*
+        System.out.println("Databasanslutningen stängd.");
     }
 }
 
