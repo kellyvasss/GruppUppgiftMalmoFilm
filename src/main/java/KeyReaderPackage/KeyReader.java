@@ -6,20 +6,15 @@ import java.util.Properties;
 public class KeyReader {
 
     Properties prop;
-
-    private KeyReader(Properties properties) {
-        this.prop = properties;
-    }
-
-    public static KeyReader fromFile(String fileKey) {
-        Properties properties = new Properties();
+    public KeyReader fromFile(String fileKey) {
+        prop = new Properties();
         String userHome = System.getProperty("user.home");
         try {
             FileInputStream input = new FileInputStream(userHome + "/OneDrive/Dokument/APIkeys/" + fileKey + ".txt");
-            properties.load(input);
+            prop.load(input);
         } catch (Exception e) {
         }
-        return new KeyReader(properties);
+
     }
 
     public String getAPIKey(){

@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -81,44 +83,44 @@ public class HelloController {
                 result.setText("The movie was not found");
             }
         } else { // Om sqlite hittade filmen, skall denna visas i TextArea
-            result.setText(sqLite.getMovie(search));
+            result.setText(Arrays.toString(sqLite.getMovie(search)));
         }
     }
-    private void searchActor(String search) {
+    private void searchActor(String search) throws SQLException {
         // Här går det enbart att söka via SQLite
         if (sqLite.getActor(search) == null) {
             // Om actor ej hittas
             result.setText("The actor was not found");
         } else {
             // Om actor hittas, använd metod getActor för att skriva ut info om actor
-            result.setText(sqLite.getActor(search));
+            result.setText(Arrays.toString(sqLite.getActor(search)));
         }
     }
-    private void searchDirector(String search) {
+    private void searchDirector(String search) throws SQLException {
         // Här går det bara att söka via SQLite
         if (sqLite.getDirector(search) == null) {
             result.setText("The director was not found");
         } else {
-            result.setText(sqLite.getDirector(search));
+            result.setText(Arrays.toString(sqLite.getDirector(search)));
         }
     }
-    private void searchGenre(String search) {
+    private void searchGenre(String search) throws SQLException {
         // Här går det bara att söka via SQLite
         if (sqLite.getGenre(search) == null) {
             result.setText("The genre was not found");
         } else {
-            result.setText(sqLite.getGenre(search));
+            result.setText(Arrays.toString(sqLite.getGenre(search)));
         }
     }
-    private void searchYear(String search) {
+    private void searchYear(String search) throws SQLException {
         // Här går det bara att söka via SQLite
         if (sqLite.getYear(search) == null) {
             result.setText("The year was not found");
         } else {
-            result.setText(sqLite.getYear(search));
+            result.setText(Arrays.toString(sqLite.getYear(search)));
         }
     }
-    private void searchTitleAndYear(String search, String searchYear) {
+    private void searchTitleAndYear(String search, String searchYear) throws SQLException {
         // Här går det med sökning från API och SQL
         // Men först skall det sökas efter i DB
         // Hämtar användarens sökning i TextField
@@ -131,7 +133,7 @@ public class HelloController {
                 result.setText("The movie with that year was not found");
             }
         } else { // Om sqlite hittade filmen, skall denna visas i TextArea
-            result.setText(sqLite.getMovie(search, searchYear));
+                result.setText(Arrays.toString(sqLite.getMovie(search, searchYear)));
         }
     }
     private void showAllMoviesByTitle(String search) {
@@ -139,11 +141,11 @@ public class HelloController {
         if (sqLite.getMovie(search) == null) {
             result.setText("No movies with that title was found");
         } else {
-            result.setText(sqLite.getMovie(search));
+            result.setText(Arrays.toString(sqLite.getMovie(search)));
         }
     }
     @FXML
-    protected void onSearchClick() {
+    protected void onSearchClick() throws SQLException {
         String search = userSearch(userInputNotYear);
         if (!search.isEmpty()) {
             setTextAlert("Missing search", "You have to type in something to search for");

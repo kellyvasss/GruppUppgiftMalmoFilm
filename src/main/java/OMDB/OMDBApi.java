@@ -102,7 +102,7 @@ public class OMDBApi {
         }
     }
 
-    private Movie createMovie(JSONObject json) {
+    public Movie createMovie(JSONObject json) {
         if (json == null) {
             return null;
         }
