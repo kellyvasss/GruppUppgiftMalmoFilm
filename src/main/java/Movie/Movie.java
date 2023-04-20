@@ -8,10 +8,11 @@ public class Movie {
      String genre;
      String director;
      String type;
+     String actor;
 
 
      //Konstruktor för att skapa en instans av klassen Movie.Movie
-    public Movie(String title, String year, String rated, String released, String runtime, String genre, String director, String writer, String actors, String plot, String language, String country, String awards, String poster, String metascore, String imdbRating, String imdbVotes, String imdbID, String type) {
+    public Movie(String title, String year,  String genre, String director, String actor, String type) {
 
         //Sätt värden för alla variabler
         this.title = title;
@@ -19,6 +20,7 @@ public class Movie {
         this.genre = genre;
         this.director = director;
         this.type = type;
+        this.actor=actor;
     }
 
     //Getters & Setters-metoder för att hämta och ändra instansvariabler
@@ -29,7 +31,6 @@ public class Movie {
     public void setTitle(String title) {
         this.title = title;
     }
-
     public String getYear() {
         return year;
     }
@@ -60,5 +61,13 @@ public class Movie {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getActor() {
+        return actor;
+    }
+
+    public void setActor(String actor) {
+        this.actor = actor;
     }
 }
