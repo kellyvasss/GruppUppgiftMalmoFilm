@@ -117,10 +117,9 @@ public class HelloController {
         // Här går det med sökning från API och SQL
         // Men först skall det sökas efter i DB
         // Hämtar användarens sökning i TextField
-        if (sqLite.getMovie(search, searchYear) == null) {
+        if (sqLite.getMovieTitleAndYear(search, searchYear).isEmpty()) {
             if (omdbApi.searchTitleAndYear(search, searchYear) != null) { // om filmen finns i omdb API
                 Movie movie1 = omdbApi.createMovie(omdbApi.searchTitleAndYear(search, searchYear)); // Ny film sparas från omdb's API
-                JSONObject object = omdbApi.searchTitleAndYear(search,searchYear);
                 result.setText(movie1.toString()); // Information om film skrivs ut i TextArea
                 addMovie(movie1); // Frågar om användaren vill lägga till filmen i DB
             } else {
