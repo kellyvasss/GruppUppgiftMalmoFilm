@@ -37,7 +37,7 @@ public class HelloController {
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         keyReader = new KeyReader("OMDB");
         omdbApi = new OMDBApi(keyReader.getAPIKey());
-        sqLite = new SQLite("Movie DB");
+        sqLite = new SQLite("movies");
         sqLite.createTable();
 
     }
