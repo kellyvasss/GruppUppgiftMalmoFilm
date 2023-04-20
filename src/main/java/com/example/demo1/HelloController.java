@@ -10,6 +10,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Objects;
 import java.util.Optional;
 
 public class HelloController {
@@ -31,6 +34,7 @@ public class HelloController {
     private KeyReader keyReader;
 
     private Movie movie;
+
     public HelloController() {
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         sqLite = new SQLite("Movie DB");
@@ -38,6 +42,7 @@ public class HelloController {
         omdbApi = new OMDBApi(keyReader.getAPIKey());
 
     }
+
     private void addMovie(Movie movie) {
         alert.setTitle("Add Movie");
         alert.setHeaderText(null);
@@ -47,26 +52,34 @@ public class HelloController {
             sqLite.addMovie(movie);
         }
     }
+
     private void moviePic() {
         // Här behövs det från JSON-object att man tar key-value "Poster"
         Image image1 = new Image("https://m.media-amazon.com/images/M/MV5BZGM5NjliODgtODVlOS00OWZmLWIzYzMtMTI2OWIzMTM1ZGRhXkEyXkFqcGdeQXVyNDUzOTQ5MjY@._V1_SX300.jpg");
         image.setImage(image1);
     }
+
     private String userSearch(TextField textField) {
         try {
             return textField.getText();
         } catch (RuntimeException e) {
-        } return null;
+        }
+        return null;
     }
+    void setTextAlert(String title, String content) {
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+    }
+
     @FXML
     protected void onSearchClick() {
-        userInputYear.setVisible(true);
-        userInputNotYear.setVisible(true);
-        result.setVisible(true);
         String search = userSearch(userInputNotYear);
         if (!search.isEmpty()) {
-            userInputYear.setVisible(true);
-            userInputNotYear.setVisible(true);
+            setTextAlert("Missing search", "You have to type in something to search for");
+            alert.showAndWait();
+            return;
+        }
             result.setVisible(true);
 
             String userChoiseBox = choiceBoxChoice();
@@ -79,100 +92,122 @@ public class HelloController {
                     // SQLite och sen efter kontroll mot API:et.
 
                     // Om sqlite db ej hittar filmen som sökt på
-                    if(sqLite.getMovie(search) == null) {
-                        if(omdbApi.searchTitle(search) != null) { // om filmen finns i omdb API
+                    if (sqLite.getMovie(search) == null) {
+                        if (omdbApi.searchTitle(search) != null) { // om filmen finns i omdb API
                             Movie movie1 = omdbApi.createMovie(omdbApi.searchTitle(search)); // Ny film sparas från omdb's API
                             result.setText(movie1.toString()); // Information om film skrivs ut i TextArea
                             addMovie(movie1); // Frågar om användaren vill lägga till filmen i DB
+                        } else {
+                            result.setText("The movie was not found");
                         }
-                    }
-                    else { // Om sqlite hittade filmen, skall denna visas i TextArea
+                    } else { // Om sqlite hittade filmen, skall denna visas i TextArea
                         result.setText(sqLite.getMovie(search));
                     }
 
                     break;
                 case "Search on: Actor":
                     // Här går det enbart att söka via SQLite
-                    if(sqLite.getActor(search) == null) {
+                    if (sqLite.getActor(search) == null) {
                         // Om actor ej hittas
                         result.setText("The actor was not found");
-                    }
-                    else {
+                    } else {
                         // Om actor hittas, använd metod getActor för att skriva ut info om actor
                         result.setText(sqLite.getActor(search));
                     }
                     break;
                 case "Search on: Director":
                     // Här går det bara att söka via SQLite
-                    if(sqLite.getDirector(search) == null) {
+                    if (sqLite.getDirector(search) == null) {
                         result.setText("The director was not found");
-                    }
-                    else {
+                    } else {
                         result.setText(sqLite.getDirector(search));
                     }
                     break;
                 case "Search on: Genre":
                     // Här går det bara att söka via SQLite
-                    if(sqLite.getGenre(search) == null) {
+                    if (sqLite.getGenre(search) == null) {
                         result.setText("The genre was not found");
-                    }
-                    else {
+                    } else {
                         result.setText(sqLite.getGenre(search));
                     }
                     break;
                 case "Search on: Year":
                     // Här går det bara att söka via SQLite
-                    if(sqLite.getYear(search) == null) {
+                    if (sqLite.getYear(search) == null) {
                         result.setText("The year was not found");
-                    }
-                    else {
+                    } else {
                         result.setText(sqLite.getYear(search));
                     }
-
                     break;
                 case "Search on: Movie Title and Year":
                     // Här går det med sökning från API och SQL
                     // Men först skall det sökas efter i DB
                     // Hämtar användarens sökning i TextField
                     String searchYear = userSearch(userInputYear);
-                    if(sqLite.getMovie(search, searchYear) == null) {
-                        if(omdbApi.searchTitleAndYear(search, searchYear) != null) { // om filmen finns i omdb API
+                    if (sqLite.getMovie(search, searchYear) == null) {
+                        if (omdbApi.searchTitleAndYear(search, searchYear) != null) { // om filmen finns i omdb API
                             Movie movie1 = omdbApi.createMovie(omdbApi.searchTitleAndYear(search)); // Ny film sparas från omdb's API
                             result.setText(movie1.toString()); // Information om film skrivs ut i TextArea
                             addMovie(movie1); // Frågar om användaren vill lägga till filmen i DB
+                        } else {
+                            result.setText("The movie with that year was not found");
                         }
-                    }
-                    else { // Om sqlite hittade filmen, skall denna visas i TextArea
+                    } else { // Om sqlite hittade filmen, skall denna visas i TextArea
                         result.setText(sqLite.getMovie(search, searchYear));
                     }
-
                     break;
                 case "Show all: Movie Titles":
-
+                    // Här går det bara att söka via SQLite
+                    if (sqLite.getMovie(search) == null) {
+                        result.setText("No movies with that title was found");
+                    } else {
+                        result.setText(sqLite.getMovie(search));
+                    }
                     break;
                 case "Show all: Movies by Actor":
-
+                    // Här går det bara att söka via SQLite
+                    if (sqLite.getActor(search) == null) {
+                        result.setText("No movies by that actor was found.");
+                    } else {
+                        result.setText(sqLite.getActor(search));
+                    }
                     break;
                 case "Show all: Movies by Director":
-
+                    // SQLite
+                    if (sqLite.getDirector(search) == null) {
+                        result.setText("No movies by that director was found");
+                    } else {
+                        result.setText(sqLite.getDirector(search));
+                    }
                     break;
                 case "Show all: Movies by Genre":
+                    // SQLite
+                    if (sqLite.getGenre(search) == null) {
+                        result.setText("No movies with that genre was found");
+                    } else {
+                        result.setText(sqLite.getGenre(search));
+                    }
 
                     break;
                 case "Show all: Movies by Year":
-
+                    // SQLite
+                    if (sqLite.getYear(search) == null) {
+                        result.setText("No movies from that year was found");
+                    } else {
+                        result.setText(sqLite.getYear(search));
+                    }
                     break;
                 default:
                     alert.setTitle("Note");
                     alert.setHeaderText(null);
                     alert.setContentText("You have to search on something.");
             }
-        moviePic();
     }
 
-}@FXML
+    @FXML
     private String choiceBoxChoice() {
         return categories.getValue().toString();
     }
+
 
 }
