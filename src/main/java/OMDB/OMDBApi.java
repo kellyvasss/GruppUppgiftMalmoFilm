@@ -1,6 +1,6 @@
 import org.json.JSONObject;
 
-
+import Movie.Movie;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
