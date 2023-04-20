@@ -116,6 +116,9 @@ public class HelloController {
         // Här går det bara att söka via SQLite
         result.setText(sqLite.getMovieYear(search));
     }
+    private void showAllMovieByYear(String search) {
+        result.setText(sqLite.getAllMovieByYear(search));
+    }
 
     // Här är det inte helt klart
     private void searchTitleAndYear(String search, String searchYear) throws SQLException {
@@ -125,11 +128,13 @@ public class HelloController {
         if (sqLite.getMovieTitleAndYear(search, searchYear).isEmpty()) {
             if (omdbApi.searchTitleAndYear(search, searchYear) != null) { // om filmen finns i omdb API
                 Movie movie1 = omdbApi.createMovie(omdbApi.searchTitleAndYear(search, searchYear)); // Ny film sparas från omdb's API
+                if(movie1.getTitle().isEmpty() || movie1.getTitle() == null) { // Detta betyder att film inte hittats
+                    result.setText("The movie with that year was not found");
+                    return;
+                }
                 moviePic(movie1.getPoster());
                 result.setText(movie1.toString()); // Information om film skrivs ut i TextArea
                 addMovie(movie1); // Frågar om användaren vill lägga till filmen i DB
-            } else {
-                result.setText("The movie with that year was not found");
             }
         } else { // Om sqlite hittade filmen, skall denna visas i TextArea
                 result.setText(Arrays.toString(sqLite.getMovie(search, searchYear)));
@@ -181,6 +186,12 @@ public class HelloController {
                 break;
                 // Uppdaterad SQL kod som fungerar
             case "Show all: Movies by Year":
+                if(search.isEmpty()){
+                    showAllMovieByYear(userSearch(userInputYear));
+                }
+                else {
+                    showAllMovieByYear(search);
+                }
             case "Search on: Year":
                 searchYear(search);
                 break;

@@ -97,9 +97,9 @@ public class SQLite {
         String sql = "SELECT * FROM movies WHERE actors LIKE ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1,actor);
+            preparedStatement.setString(1,"%"+actor+"%");
             ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next()) {
+            while(rs.next()) {
                 movies += "Titel: " + rs.getString("title") +
                         "\nYear: " + rs.getString("year") +
                         "\nDirector: " + rs.getString("director") +
@@ -126,7 +126,7 @@ public class SQLite {
         String sql = "SELECT * FROM movies WHERE director =?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1,director);
+            preparedStatement.setString(1,"%"+director+"%");
             ResultSet rs = preparedStatement.executeQuery();
             if(rs.next()) {
                 movies += "Titel: " + rs.getString("title") +
@@ -150,18 +150,16 @@ public class SQLite {
         pstmt.setString(1, director);
         return getMovie(pstmt.toString());
     }
+
     public String getMovieGenre(String genre) {
         String movies = "";
-        String sql = "SELECT * FROM movies WHERE genre =?";
+        String sql = "SELECT * FROM movies WHERE genre LIKE ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1,genre);
+            preparedStatement.setString(1,"%"+genre+"%");
             ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next()) {
+            while(rs.next()) {
                 movies += "Titel: " + rs.getString("title") +
-                        "\nYear: " + rs.getString("year") +
-                        "\nDirector: " + rs.getString("director") +
-                        "\nActors: " + rs.getString("actors") +
                         "\nGenre: " + rs.getString("genre") +
                         "\n";
             }
