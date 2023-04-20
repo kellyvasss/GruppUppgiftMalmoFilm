@@ -6,16 +6,16 @@ import java.sql.*;
 
 public class SQLite {
 
-    Connection conn; // Objekt för att kommunicera med databasen
-    String  dbName; //namnet på databasfilen
+    Connection conn = null; // Objekt för att kommunicera med databasen
+    String  dbName = ""; //namnet på databasfilen
     public SQLite(String dbName){
         this.dbName=dbName; //sparar namnet i databasfilen
-        conn=null; //initierar anslutningsobjektet till null
+        //conn=null; //initierar anslutningsobjektet till null
         try{
-            conn= DriverManager.getConnection("jdbc:sqlite:"+dbName); //anslut till databasen
-            System.out.println("Databasen har öppnats"); // meddelande för lyckad anslutning
+            conn = DriverManager.getConnection("jdbc:sqlite:" +dbName+ ".db"); //anslut till databasen
+           // System.out.println("Databasen har öppnats"); // meddelande för lyckad anslutning
         }catch (SQLException e){ //fånga undantag
-            System.out.println("Error: " +e.getMessage()); // felmeddelande vid misslyckad anslutning
+           // System.out.println("Error: " +e.getMessage()); // felmeddelande vid misslyckad anslutning
         }
     }
 
@@ -83,23 +83,23 @@ public class SQLite {
         System.out.println("Filmen har lagts till"); //skriv ut film lagts till
     }
     public void createTable(){
+        String sql= "CREATE TABLE IF NOT EXISTS movies (\n"
+                + "id INTEGER PRIMARY KEY,\n"
+                + "title TEXT,\n"
+                + "year TEXT,\n"
+                + "type TEXT,\n"
+                + "director TEXT,\n"
+                + "actors TEXT,\n"
+                + "genre TEXT\n"
+                + ");";
         try {
             Statement stmt = conn.createStatement();
-            String sql= "CREATE TABLE IF NOT EXISTS movies (\n"
-                    + "id INTEGER PRIMARY KEY,\n"
-                    + "title TEXT,\n"
-                    + "year TEXT,\n"
-                    + "type TEXT,\n"
-                    + "director TEXT,\n"
-                    + "actors TEXT,\n"
-                    + "genre TEXT\n"
-                    + ");";
             stmt.execute(sql);
             stmt.close();
         }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
+        //    System.out.println("Error: " + e.getMessage());
         }
-        System.out.println("Tabellen har skapats.");
+      //  System.out.println("Tabellen har skapats.");
     }
 
     public void close(){
