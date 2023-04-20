@@ -179,6 +179,30 @@ public class SQLite {
         pstmt.setString(1, "&" + genre + "&");
         return getMovie(pstmt.toString());
     }
+    public String getAllMovieByYear(String year) {
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE year =?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,year);
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            return "bajs";
+
+        }
+        if (movies.isEmpty()) {
+            return "No movies from this year found";
+        }
+        return movies;
+    }
     public String getMovieYear(String year) {
         String movies = "";
         String sql = "SELECT * FROM movies WHERE year =?";
