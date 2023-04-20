@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9066c662-41b3-4f0e-a8aa-0d43f896ec72" name="Changes" comment="---">
-      <change beforePath="$PROJECT_DIR$/src/main/java/Movie/Movie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Movie/Movie.java" afterDir="false" />
+    <list default="true" id="9066c662-41b3-4f0e-a8aa-0d43f896ec72" name="Changes" comment="----">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +126,13 @@
       <option name="presentableId" value="LOCAL−00007" />
       <updated>1681985203921</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL−00008" summary="----">
+      <created>1681985543837</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1681985543837</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -134,6 +140,7 @@
     <MESSAGE value="gitignore" />
     <MESSAGE value="--" />
     <MESSAGE value="---" />
-    <option name="LAST_COMMIT_MESSAGE" value="---" />
+    <MESSAGE value="----" />
+    <option name="LAST_COMMIT_MESSAGE" value="----" />
   </component>
 </project>
