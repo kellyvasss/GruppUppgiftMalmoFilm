@@ -1,5 +1,9 @@
 package com.example.demo1;
 
+import KeyReaderPackage.KeyReader;
+import Movie.Movie;
+import OMDB.OMDBApi;
+import SQLite.SQLite;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,18 +26,25 @@ public class HelloController {
     @FXML
     private ImageView image;
     private Alert alert;
+    private SQLite sqLite;
+    private OMDBApi omdbApi;
+    private KeyReader keyReader;
 
-
+    private Movie movie;
     public HelloController() {
         alert = new Alert(Alert.AlertType.CONFIRMATION);
+        sqLite = new SQLite("Movie DB");
+        keyReader = new KeyReader("OMDB");
+        omdbApi = new OMDBApi(keyReader.getAPIKey());
+
     }
     private void addMovie() {
-        alert.setTitle("Add Movie.Movie");
+        alert.setTitle("Add Movie");
         alert.setHeaderText(null);
         alert.setContentText("Do you want to add the movie?");
         Optional<ButtonType> userAnswer = alert.showAndWait();
         if (userAnswer.isPresent() && userAnswer.get() == ButtonType.OK) {
-            // Här behövs SQLite.SQLite för att lägga till filmen
+
         }
     }
     private void moviePic() {
