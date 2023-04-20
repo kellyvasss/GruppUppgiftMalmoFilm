@@ -8,4 +8,8 @@ module com.example.demo1 {
     exports com.example.demo1;
     //exports OMDB;
     //opens OMDB to javafx.fxml;
+
+
+    exports OMDB; // lägger till export av paketet OMDB
 }
+

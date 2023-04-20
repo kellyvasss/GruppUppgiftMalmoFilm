@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-/*public class OMDBApi {
+public class OMDBApi {
     private final String apiKey;
 
     public OMDBApi(String apiKey) {
@@ -58,31 +58,7 @@ import java.net.URLEncoder;
                     movieActors = value;
                 }
             }
-        }
 
-        // Skapar en Movie.Movie-objekt med de extraherade filmuppgifterna och returnerar objektet
-        return new Movie(movieTitle, movieYear, movieGenre, movieDirector, movieActors);
+        }
     }
-
-    public Movie getMovie(String title, String year) throws IOException {
-        // Konstruerar API-anropets URL med API-nyckeln, titeln och året på filmen som ska hämtas
-        String apiUrl = String.format("http://www.omdbapi.com/?apikey=%s&t=%s&y=%s", apiKey, URLEncoder.encode(title, "UTF-8"), year);
-        URL url = new URL(apiUrl);
-
-        // Öppnar en anslutning till API:et
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod("GET");
-
-        // Läser API:ets svar och bygger upp en sträng
-        BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String line;
-        String response = "";
-        while ((line = reader.readLine()) != null) {
-            response += line;
-        }
-        reader.close();
-
-        // Pararser API-svaret och extraherar filmens titel, år, genre, regissör och skådespelare
-        String[] parts = response.split(",");
-        String movieTitle = "";
-        int movie */
+}
