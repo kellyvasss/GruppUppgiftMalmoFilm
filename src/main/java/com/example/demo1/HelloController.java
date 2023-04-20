@@ -3,14 +3,12 @@ package com.example.demo1;
 import KeyReaderPackage.KeyReader;
 import Movie.Movie;
 import OMDB.OMDBApi;
-
 import SQLite.SQLite;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
@@ -126,7 +124,7 @@ public class HelloController {
         // Hämtar användarens sökning i TextField
         if (sqLite.getMovie(search, searchYear) == null) {
             if (omdbApi.searchTitleAndYear(search, searchYear) != null) { // om filmen finns i omdb API
-                Movie movie1 = omdbApi.createMovie(omdbApi.searchTitleAndYear(search)); // Ny film sparas från omdb's API
+                Movie movie1 = omdbApi.createMovie(omdbApi.searchTitleAndYear(search, searchYear)); // Ny film sparas från omdb's API
                 result.setText(movie1.toString()); // Information om film skrivs ut i TextArea
                 addMovie(movie1); // Frågar om användaren vill lägga till filmen i DB
             } else {
