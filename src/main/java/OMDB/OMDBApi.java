@@ -115,9 +115,9 @@ public class OMDBApi {
         String year = json.optString("Year", "");
         String director = json.optString("Director", "");
         String posterUrl = json.optString("Poster", "");
-        String actor = json.optString("actor", "");
+        String actor = json.optString("Actors", "");
         String genre = json.optString("Genre", "");
-        String type = json.optString("type", "");
+        String type = json.optString("Type", "");
 
         return new Movie(title,year,genre,director,actor,type, posterUrl);
     }

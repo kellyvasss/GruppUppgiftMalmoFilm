@@ -54,8 +54,13 @@ public class HelloController {
     }
     private void moviePic(String poster) {
         // Här behövs det från JSON-object att man tar key-value "Poster"
-        Image image1 = new Image(poster);
-        image.setImage(image1);
+        try {
+            Image image1 = new Image(poster);
+            image.setImage(image1);
+        } catch (RuntimeException e) {
+
+        }
+
     }
     private String userSearch(TextField textField) {
         try {
