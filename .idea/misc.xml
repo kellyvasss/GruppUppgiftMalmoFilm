@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
+    <output url="file://$PROJECT_DIR$/out" />
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
-  </component>
-    <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
