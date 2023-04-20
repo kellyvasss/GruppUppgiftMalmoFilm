@@ -19,8 +19,30 @@ public class SQLite {
         }
     }
 
+    // Så här fungerar det
+    public String getMovieTitles(String title) {
+
+        String movies = "";
+        String sql = "SELECT * FROM movies WHERE title =?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1,title);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                movies += "Titel: " + rs.getString("title") +
+                        "\nYear: " + rs.getString("year") +
+                        "\nDirector: " + rs.getString("director") +
+                        "\nActors: " + rs.getString("actors") +
+                        "\nGenre: " + rs.getString("genre") +
+                        "\n";
+            }
+        } catch (SQLException e ) {
+            System.exit(0);
+        } return movies;
+    }
 
         public Movie[] getMovie(String title) {
+
             try {
                 PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM movies WHERE title = ?");
                 pstmt.setString(1, title);

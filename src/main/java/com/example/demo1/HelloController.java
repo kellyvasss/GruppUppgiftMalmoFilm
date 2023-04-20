@@ -118,6 +118,7 @@ public class HelloController {
             result.setText(Arrays.toString(sqLite.getYear(search)));
         }
     }
+
     private void searchTitleAndYear(String search, String searchYear) throws SQLException {
         // Här går det med sökning från API och SQL
         // Men först skall det sökas efter i DB
@@ -155,7 +156,8 @@ public class HelloController {
             // Här bestämst hur sökningen skall genomföras genom att kontrollera vilket alternativ i choiceBoxen användaren valt
         switch (userChoiseBox) {
             case "Search on: Movie Title":
-                searchMovie(search);
+                //searchMovie(search);
+                result.setText(sqLite.getMovieTitles(search));
                 break;
             case "Show all: Movies by Actor":
             case "Search on: Actor":
