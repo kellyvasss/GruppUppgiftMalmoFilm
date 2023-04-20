@@ -1,3 +1,5 @@
+package OMDB;
+
 import org.json.JSONObject;
 
 import Movie.Movie;
@@ -28,7 +30,7 @@ public class OMDBApi {
         return createMovie(json);
     }
 
-    private JSONObject searchTitle(String title) {
+    public JSONObject searchTitle(String title) {
         String apiUrl = "https://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title;
 
         try {
@@ -52,7 +54,7 @@ public class OMDBApi {
         }
     }
 
-    private JSONObject searchTitleAndYear(String title, String year) {
+    public JSONObject searchTitleAndYear(String title, String year) {
         String apiUrl = "https://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title + "&y=" + year;
 
         try {
@@ -76,7 +78,7 @@ public class OMDBApi {
         }
     }
 
-    private JSONObject searchTitleYearAndType(String title, String year, String type) {
+    public JSONObject searchTitleYearAndType(String title, String year, String type) {
         String apiUrl = "https://www.omdbapi.com/?apikey=" + apiKey + "&t=" + title + "&y=" + year + "&type=" + type;
 
         try {
