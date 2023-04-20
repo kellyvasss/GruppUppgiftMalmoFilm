@@ -33,9 +33,6 @@ public class HelloController {
     private SQLite sqLite;
     private OMDBApi omdbApi;
     private KeyReader keyReader;
-
-    private Movie movie;
-
     public HelloController() {
         alert = new Alert(Alert.AlertType.CONFIRMATION);
         sqLite = new SQLite("Movie DB");
