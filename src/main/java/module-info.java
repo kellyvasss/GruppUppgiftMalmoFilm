@@ -2,6 +2,7 @@ module com.example.demo1 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.json;
 
 
     opens com.example.demo1 to javafx.fxml;
@@ -10,6 +11,5 @@ module com.example.demo1 {
     //opens OMDB to javafx.fxml;
 
 
-    exports OMDB; // lägger till export av paketet OMDB
 }
 
